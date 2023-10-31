@@ -1,0 +1,45 @@
+#include <queue>
+#include <string>
+#include <iostream>
+
+struct Estudiante {
+    std::string nombre;
+    std::string carrera;
+    int materias_aprobadas;
+    float promedio_general;
+};
+
+std::queue<Estudiante> solicitudes;
+
+void altaSolicitud(Estudiante estudiante) {
+    solicitudes.push(estudiante);
+}
+
+void elaborarConstancia() {
+    if (!solicitudes.empty()) {
+        Estudiante estudiante = solicitudes.front();
+        solicitudes.pop();
+
+        std::cout << "Constancia de estudio\n";
+        std::cout << "Nombre: " << estudiante.nombre << "\n";
+        std::cout << "Carrera: " << estudiante.carrera << "\n";
+        std::cout << "Materias aprobadas: " << estudiante.materias_aprobadas << "\n";
+        std::cout << "Promedio general: " << estudiante.promedio_general << "\n";
+    } else {
+        std::cout << "No hay solicitudes pendientes.\n";
+    }
+}
+
+int main() {
+    // Ejemplo de uso
+    Estudiante estudiante1 = {"Juan Perez", "Ingeniería en Computación", 20, 8.5};
+    altaSolicitud(estudiante1);
+
+    Estudiante estudiante2 = {"Maria Rodriguez", "Licenciatura en Matemáticas", 22, 9.0};
+    altaSolicitud(estudiante2);
+
+    elaborarConstancia();  // Elabora la constancia para Juan Perez
+    elaborarConstancia();  // Elabora la constancia para Maria Rodriguez
+
+    return 0;
+}
